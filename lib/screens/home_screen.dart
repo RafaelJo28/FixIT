@@ -29,7 +29,7 @@ void _comingSoon(BuildContext context, String feature) {
 /// Layout: header, search, active order, promos, trust, urgency,
 /// categories, popular services, reviews, and all services.
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key, this.onOpenOrders});
+  const HomeScreen({super.key, this.onOpenOrders, onOpenProfile});
 
   /// Called when the active-order card is tapped (RootShell switches tabs).
   final VoidCallback? onOpenOrders;

@@ -8,6 +8,9 @@ Finder navLabel(String label) => find.descendant(
   matching: find.text(label),
 );
 
+int currentTab(WidgetTester tester) =>
+    tester.widget<BottomNavigationBar>(find.byType(BottomNavigationBar)).currentIndex;
+
 void main() {
   testWidgets('FixIT home screen renders core UI', (WidgetTester tester) async {
     await tester.pumpWidget(const FixITApp());
@@ -33,11 +36,11 @@ void main() {
     expect(find.text('Layanan Populer'), findsOneWidget);
 
     await tester.scrollUntilVisible(
-      find.text('Semua Layanan'),
+      find.text('Kata Pelanggan'),
       300,
       scrollable: find.byType(Scrollable).first,
     );
-    expect(find.text('Semua Layanan'), findsOneWidget);
+    expect(find.text('Kata Pelanggan'), findsOneWidget);
   });
 
   testWidgets('navigates Beranda -> Pesanan -> Profil tabs', (
@@ -54,15 +57,28 @@ void main() {
     expect(find.text('Joel Pratama'), findsOneWidget);
   });
 
-  testWidgets('active order card opens the Pesanan tab', (
+  testWidgets('active order card switches to the Pesanan tab', (
     WidgetTester tester,
   ) async {
     await tester.pumpWidget(const FixITApp());
+    expect(currentTab(tester), 0);
 
     await tester.ensureVisible(find.text('Pesanan aktif'));
     await tester.tap(find.text('Pesanan aktif'));
     await tester.pumpAndSettle();
 
-    expect(find.text('Pesanan Saya'), findsOneWidget);
+    expect(currentTab(tester), 1);
+  });
+
+  testWidgets('profile button switches to the Profil tab', (
+    WidgetTester tester,
+  ) async {
+    await tester.pumpWidget(const FixITApp());
+    expect(currentTab(tester), 0);
+
+    await tester.tap(find.byIcon(Icons.account_circle_rounded));
+    await tester.pumpAndSettle();
+
+    expect(currentTab(tester), 3);
   });
 }

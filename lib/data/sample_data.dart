@@ -144,7 +144,7 @@ class SampleData {
       rating: 4.8,
       durationMinutes: 60,
       popular: true,
-      icon: Icons.local_drink_rounded,
+      icon: Icons.chair_rounded,
     ),
     ServiceItem(
       id: 'general-assembly-1',
@@ -158,7 +158,7 @@ class SampleData {
     ),
     ServiceItem(
       id: 'general-clean-1',
-      categoryId: 'general',
+      categoryId: 'cleaning',
       name: 'Cuci Sofa & Kursi',
       description: 'Pembersihan menyeluruh sofa dan kursi rumah dengan alat cuci vakum.',
       price: 150000,
@@ -168,8 +168,8 @@ class SampleData {
     ),
     ServiceItem(
       id: 'general-install-1',
-      categoryId: 'general',
-      name: 'Pasang AC & Listrik',
+      categoryId: 'electrical',
+      name: 'Pasang Stopkontak & Kabel',
       description: 'Pemasangan kabel, stopkontak, dan fitting listrik di rumah.',
       price: 130000,
       rating: 4.7,

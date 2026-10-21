@@ -30,6 +30,7 @@ class ServiceItem {
     required this.rating,
     required this.durationMinutes,
     this.popular = false,
+    this.icon,
   });
 
   final String id;
@@ -40,6 +41,7 @@ class ServiceItem {
   final double rating;
   final int durationMinutes;
   final bool popular;
+  final IconData? icon;
 }
 
 class PaymentMethod {

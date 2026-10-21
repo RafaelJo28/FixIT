@@ -144,6 +144,7 @@ class SampleData {
       rating: 4.8,
       durationMinutes: 60,
       popular: true,
+      icon: Icons.local_drink_rounded,
     ),
     ServiceItem(
       id: 'general-assembly-1',
@@ -153,6 +154,7 @@ class SampleData {
       price: 110000,
       rating: 4.7,
       durationMinutes: 90,
+      icon: Icons.highlight_rounded,
     ),
     ServiceItem(
       id: 'general-clean-1',
@@ -162,6 +164,7 @@ class SampleData {
       price: 150000,
       rating: 4.6,
       durationMinutes: 120,
+      icon: Icons.cleaning_services_rounded,
     ),
     ServiceItem(
       id: 'general-install-1',
@@ -171,6 +174,7 @@ class SampleData {
       price: 130000,
       rating: 4.7,
       durationMinutes: 100,
+      icon: Icons.electrical_services_rounded,
     ),
   ];
 

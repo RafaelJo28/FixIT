@@ -43,8 +43,8 @@ class SampleData {
     ),
     ServiceCategory(
       id: 'general',
-      name: 'Tukang Serba Bisa',
-      icon: Icons.handyman_rounded,
+      name: 'Lainnya',
+      icon: Icons.apps_rounded,
       color: Color(0xFF1E40AF),
     ),
   ];
@@ -144,6 +144,33 @@ class SampleData {
       rating: 4.8,
       durationMinutes: 60,
       popular: true,
+    ),
+    ServiceItem(
+      id: 'general-assembly-1',
+      categoryId: 'general',
+      name: 'Rangka Kayu / Besi',
+      description: 'Pemasangan rangka untuk meja, kursi, atau rak baja dan kayu.',
+      price: 110000,
+      rating: 4.7,
+      durationMinutes: 90,
+    ),
+    ServiceItem(
+      id: 'general-clean-1',
+      categoryId: 'general',
+      name: 'Cuci Sofa & Kursi',
+      description: 'Pembersihan menyeluruh sofa dan kursi rumah dengan alat cuci vakum.',
+      price: 150000,
+      rating: 4.6,
+      durationMinutes: 120,
+    ),
+    ServiceItem(
+      id: 'general-install-1',
+      categoryId: 'general',
+      name: 'Pasang AC & Listrik',
+      description: 'Pemasangan kabel, stopkontak, dan fitting listrik di rumah.',
+      price: 130000,
+      rating: 4.7,
+      durationMinutes: 100,
     ),
   ];
 

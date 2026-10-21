@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'home_screen.dart';
 import 'messages_screen.dart';
 import 'orders_screen.dart';
-import 'profile_screen.dart';
+import 'fixie_screen.dart';
 
-/// App scaffold with the bottom navigation bar (Beranda / Pesanan / Pesan / Profil).
+/// App scaffold with the bottom navigation bar (Beranda / Pesanan / Pesan / Fixie).
 class RootShell extends StatefulWidget {
   const RootShell({super.key});
 
@@ -29,7 +29,7 @@ class _RootShellState extends State<RootShell> {
           HomeScreen(onOpenOrders: () => _goTo(1)),
           const OrdersScreen(),
           const MessagesScreen(),
-          const ProfileScreen(),
+          const FixieScreen(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -54,7 +54,7 @@ class _RootShellState extends State<RootShell> {
           BottomNavigationBarItem(
             icon: Icon(Icons.receipt_long_outlined),
             activeIcon: Icon(Icons.receipt_long_rounded),
-            label: 'Pesanan',
+            label: 'Transaksi',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.chat_bubble_outline),
@@ -62,9 +62,9 @@ class _RootShellState extends State<RootShell> {
             label: 'Pesan',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person_outline_rounded),
-            activeIcon: Icon(Icons.person_rounded),
-            label: 'Profil',
+            icon: Icon(Icons.smart_toy_outlined),
+            activeIcon: Icon(Icons.smart_toy_rounded),
+            label: 'Fixie',
           ),
         ],
       ),

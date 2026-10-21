@@ -46,7 +46,7 @@ class SuccessScreen extends StatelessWidget {
                       letterSpacing: -0.5)),
               const SizedBox(height: 8),
               const Text(
-                'Teknisi akan segera dikonfirmasi. Kami kirim update lewat WhatsApp.',
+                'Pembayaran berhasil! Teknisi akan segera mengupdate kamu melalui Pesan dalam aplikasi.',
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 14, height: 1.5, color: Color(0xFF64748B)),
               ),

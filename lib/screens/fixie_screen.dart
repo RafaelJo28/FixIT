@@ -1,146 +1,164 @@
 import 'package:flutter/material.dart';
+
 import '../theme.dart';
 
-/// Fixie AI chatbot page — placeholder stub wired later to the real AI backend.
-class FixieScreen extends StatelessWidget {
+/// One chat message. [fromFixie] is false for the customer's own messages.
+class _Msg {
+  const _Msg(this.text, {required this.fromFixie});
+
+  final String text;
+  final bool fromFixie;
+}
+
+const _greeting =
+    'Halo! Aku Fixie, asisten AI FixIT. Ceritakan masalah di rumahmu, '
+    'nanti aku bantu pilih layanan yang pas.';
+
+// PROTOTYPE ONLY: every reply is this canned text.
+const _demoReply =
+    'Terima kasih! Fixie masih dalam pengembangan, jadi balasan ini hanya '
+    'contoh. Sebentar lagi aku bisa bantu cek harga dan pesan teknisi.';
+
+const _ideas = [
+  'AC kurang dingin',
+  'Keran bocor',
+  'Listrik sering mati',
+  'Berapa biaya cuci AC?',
+];
+
+/// Fixie AI assistant tab.
+class FixieScreen extends StatefulWidget {
   const FixieScreen({super.key});
+
+  @override
+  State<FixieScreen> createState() => _FixieScreenState();
+}
+
+class _FixieScreenState extends State<FixieScreen> {
+  final _controller = TextEditingController();
+  final _scroll = ScrollController();
+  final List<_Msg> _messages = [const _Msg(_greeting, fromFixie: true)];
+
+  @override
+  void initState() {
+    super.initState();
+    _controller.addListener(() => setState(() {}));
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    _scroll.dispose();
+    super.dispose();
+  }
+
+  bool get _canSend => _controller.text.trim().isNotEmpty;
+
+  void _sendText(String raw) {
+    final text = raw.trim();
+    if (text.isEmpty) return;
+    setState(() {
+      _messages
+        ..add(_Msg(text, fromFixie: false))
+        ..add(const _Msg(_demoReply, fromFixie: true));
+      _controller.clear();
+    });
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!_scroll.hasClients) return;
+      _scroll.animateTo(
+        _scroll.position.maxScrollExtent,
+        duration: const Duration(milliseconds: 250),
+        curve: Curves.easeOut,
+      );
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.bg,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        surfaceTintColor: Colors.transparent,
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_rounded, color: AppColors.ink),
-          onPressed: () => Navigator.of(context).pop(),
+        automaticallyImplyLeading: false,
+        title: const Row(
+          children: [
+            _FixieAvatar(size: 32),
+            SizedBox(width: 10),
+            Text('Fixie'),
+          ],
         ),
-        title: const Text(
-          'Fixie',
-          style: TextStyle(
-            color: AppColors.ink,
-            fontWeight: FontWeight.w800,
-            fontSize: 20,
-          ),
-        ),
-        centerTitle: false,
       ),
       body: Column(
         children: [
           Expanded(
-            child: ListView(
-              padding: const EdgeInsets.all(20),
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(16),
-                    border: Border.all(color: AppColors.line),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          Container(
-                            width: 32,
-                            height: 32,
-                            decoration: BoxDecoration(
-                              color: AppColors.blue.withValues(alpha: 0.12),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: const Icon(
-                              Icons.smart_toy_rounded,
-                              color: AppColors.blue,
-                              size: 18,
-                            ),
-                          ),
-                          const SizedBox(width: 10),
-                          const Text(
-                            'Fixie',
-                            style: TextStyle(
-                              fontWeight: FontWeight.w800,
-                              fontSize: 16,
-                              color: AppColors.ink,
-                            ),
-                          ),
-                        ],
+            child: ListView.builder(
+              controller: _scroll,
+              padding: const EdgeInsets.fromLTRB(20, 16, 20, 8),
+              itemCount: _messages.length,
+              itemBuilder: (context, i) => _Bubble(msg: _messages[i]),
+            ),
+          ),
+          if (_messages.length == 1)
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
+              child: Wrap(
+                spacing: 8,
+                runSpacing: 8,
+                children: [
+                  for (final idea in _ideas)
+                    ActionChip(
+                      label: Text(idea),
+                      onPressed: () => _sendText(idea),
+                      backgroundColor: Colors.white,
+                      side: const BorderSide(color: AppColors.line),
+                      labelStyle: const TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w600,
+                        color: AppColors.blue,
                       ),
-                      const SizedBox(height: 12),
-                      const Text(
-                        'Halo! Aku Fixie, asisten AI kamu. '
-                        'Bisa tanya aku soal jadwal servis, estimasi biaya, '
-                        'atau bantuan pilih teknisi terdekat.',
-                        style: TextStyle(
-                          fontSize: 15,
-                          height: 1.5,
-                          color: AppColors.body,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 20),
-                const Text(
-                  'Percakapan',
-                  style: TextStyle(
-                    fontWeight: FontWeight.w700,
-                    fontSize: 14,
-                    color: AppColors.muted,
-                  ),
-                ),
-                const SizedBox(height: 12),
-                _chatBubble('Ada yang bisa aku bantu hari ini?', true),
-                const SizedBox(height: 12),
-                _chatBubble('Bisa cari tukang pipe di Bekasi?', false),
-                const SizedBox(height: 12),
-                _chatBubble('Bisa, saya akan cari tukang pipe terdekat di Bekasi untuk kamu.', true),
-              ],
+                    ),
+                ],
+              ),
+            ),
+          const Padding(
+            padding: EdgeInsets.fromLTRB(20, 0, 20, 8),
+            child: Text(
+              'Fixie adalah asisten AI dan bisa keliru. '
+              'Dalam keadaan darurat, hubungi 112.',
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 11.5, color: AppColors.muted),
             ),
           ),
           Container(
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
+            padding: const EdgeInsets.fromLTRB(16, 10, 16, 10),
+            decoration: const BoxDecoration(
               color: Colors.white,
               border: Border(top: BorderSide(color: AppColors.line)),
             ),
             child: Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Expanded(
-                  child: Material(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(14),
-                    child: TextField(
-                      decoration: InputDecoration(
-                        hintText: 'Ketik pesan ke Fixie...',
-                        border: InputBorder.none,
-                        contentPadding: const EdgeInsets.symmetric(
-                          horizontal: 16,
-                          vertical: 12,
-                        ),
-                      ),
-                      maxLines: null,
+                  child: TextField(
+                    controller: _controller,
+                    minLines: 1,
+                    maxLines: 4,
+                    textInputAction: TextInputAction.send,
+                    onSubmitted: _sendText,
+                    decoration: const InputDecoration(
+                      hintText: 'Ketik pesan ke Fixie...',
                     ),
                   ),
                 ),
                 const SizedBox(width: 10),
-                Material(
-                  color: AppColors.blue,
-                  borderRadius: BorderRadius.circular(14),
-                  child: InkWell(
-                    borderRadius: BorderRadius.circular(14),
-                    onTap: () {},
-                    child: const Padding(
-                      padding: EdgeInsets.all(14),
-                      child: Icon(
-                        Icons.send_rounded,
-                        color: Colors.white,
-                        size: 20,
-                      ),
-                    ),
+                IconButton.filled(
+                  onPressed: _canSend
+                      ? () => _sendText(_controller.text)
+                      : null,
+                  icon: const Icon(Icons.send_rounded),
+                  style: IconButton.styleFrom(
+                    backgroundColor: AppColors.blue,
+                    foregroundColor: Colors.white,
+                    disabledBackgroundColor: AppColors.line,
+                    fixedSize: const Size(48, 48),
                   ),
                 ),
               ],
@@ -152,59 +170,77 @@ class FixieScreen extends StatelessWidget {
   }
 }
 
-Widget _chatBubble(String text, bool isFixie) {
-  return Row(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      if (isFixie) ...[
-        Container(
-          width: 36,
-          height: 36,
-          decoration: BoxDecoration(
-            color: AppColors.blue.withValues(alpha: 0.12),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: const Icon(
-            Icons.smart_toy_rounded,
-            color: AppColors.blue,
-            size: 18,
-          ),
-        ),
-        const SizedBox(width: 10),
-      ],
-      Expanded(
-        child: Container(
-          padding: const EdgeInsets.all(12),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: AppColors.line),
-          ),
-          child: Text(
-            text,
-            style: const TextStyle(
-              fontSize: 14,
-              color: AppColors.ink,
+class _FixieAvatar extends StatelessWidget {
+  const _FixieAvatar({required this.size});
+
+  final double size;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: size,
+      height: size,
+      decoration: BoxDecoration(
+        color: AppColors.blue.withValues(alpha: 0.12),
+        borderRadius: BorderRadius.circular(size * 0.32),
+      ),
+      child: Icon(
+        Icons.smart_toy_rounded,
+        color: AppColors.blue,
+        size: size * 0.56,
+      ),
+    );
+  }
+}
+
+class _Bubble extends StatelessWidget {
+  const _Bubble({required this.msg});
+
+  final _Msg msg;
+
+  @override
+  Widget build(BuildContext context) {
+    final fromFixie = msg.fromFixie;
+    final maxWidth = MediaQuery.sizeOf(context).width * 0.78;
+
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 10),
+      child: Row(
+        mainAxisAlignment: fromFixie
+            ? MainAxisAlignment.start
+            : MainAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          if (fromFixie) ...[
+            const _FixieAvatar(size: 32),
+            const SizedBox(width: 8),
+          ],
+          Flexible(
+            child: Container(
+              constraints: BoxConstraints(maxWidth: maxWidth),
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+              decoration: BoxDecoration(
+                color: fromFixie ? Colors.white : AppColors.blue,
+                border: fromFixie ? Border.all(color: AppColors.line) : null,
+                borderRadius: BorderRadius.only(
+                  topLeft: const Radius.circular(18),
+                  topRight: const Radius.circular(18),
+                  bottomLeft: Radius.circular(fromFixie ? 4 : 18),
+                  bottomRight: Radius.circular(fromFixie ? 18 : 4),
+                ),
+              ),
+              child: Text(
+                msg.text,
+                style: TextStyle(
+                  fontSize: 14.5,
+                  height: 1.4,
+                  color: fromFixie ? AppColors.ink : Colors.white,
+                ),
+              ),
             ),
           ),
-        ),
+        ],
       ),
-      if (!isFixie) ...[
-        const SizedBox(width: 10),
-        Container(
-          width: 36,
-          height: 36,
-          decoration: BoxDecoration(
-            color: AppColors.muted.withValues(alpha: 0.12),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: const Icon(
-            Icons.person_rounded,
-            color: AppColors.muted,
-            size: 18,
-          ),
-        ),
-      ],
-    ],
-  );
+    );
+  }
 }

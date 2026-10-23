@@ -121,7 +121,8 @@ class SampleData {
       id: 'elec-mcb-1',
       categoryId: 'electrical',
       name: 'Cek MCB / Panel',
-      description: 'Diagnosa breaker yang trip dan masalah panel listrik di rumah Anda.',
+      description:
+          'Diagnosa breaker yang trip dan masalah panel listrik di rumah Anda.',
       price: 130000,
       rating: 4.7,
       durationMinutes: 90,
@@ -130,7 +131,8 @@ class SampleData {
       id: 'paint-room-1',
       categoryId: 'painting',
       name: 'Cat Ulang Ruangan',
-      description: 'Cat ulang satu ruangan (hingga 3x3m). Biaya cat ditagih terpisah.',
+      description:
+          'Cat ulang satu ruangan (hingga 3x3m). Biaya cat ditagih terpisah.',
       price: 350000,
       rating: 4.9,
       durationMinutes: 300,
@@ -139,7 +141,8 @@ class SampleData {
       id: 'general-mount-1',
       categoryId: 'general',
       name: 'Pasang Furnitur',
-      description: 'Pasang rak, TV, atau lemari di dinding — bor dan jangkar termasuk.',
+      description:
+          'Pasang rak, TV, atau lemari di dinding — bor dan jangkar termasuk.',
       price: 90000,
       rating: 4.8,
       durationMinutes: 60,
@@ -150,7 +153,8 @@ class SampleData {
       id: 'general-assembly-1',
       categoryId: 'general',
       name: 'Rangka Kayu / Besi',
-      description: 'Pemasangan rangka untuk meja, kursi, atau rak baja dan kayu.',
+      description:
+          'Pemasangan rangka untuk meja, kursi, atau rak baja dan kayu.',
       price: 110000,
       rating: 4.7,
       durationMinutes: 90,
@@ -160,7 +164,8 @@ class SampleData {
       id: 'general-clean-1',
       categoryId: 'cleaning',
       name: 'Cuci Sofa & Kursi',
-      description: 'Pembersihan menyeluruh sofa dan kursi rumah dengan alat cuci vakum.',
+      description:
+          'Pembersihan menyeluruh sofa dan kursi rumah dengan alat cuci vakum.',
       price: 150000,
       rating: 4.6,
       durationMinutes: 120,
@@ -170,7 +175,8 @@ class SampleData {
       id: 'general-install-1',
       categoryId: 'electrical',
       name: 'Pasang Stopkontak & Kabel',
-      description: 'Pemasangan kabel, stopkontak, dan fitting listrik di rumah.',
+      description:
+          'Pemasangan kabel, stopkontak, dan fitting listrik di rumah.',
       price: 130000,
       rating: 4.7,
       durationMinutes: 100,

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '../data/sample_data.dart';
 import '../models/models.dart';
 import '../theme.dart';
+import '../widgets/common.dart';
+import 'all_services_screen.dart';
 import 'category_screen.dart';
 import 'profile_screen.dart';
 import 'service_detail_screen.dart';
@@ -12,24 +14,12 @@ const _muted = AppColors.muted;
 const _blue = AppColors.blue;
 const _line = AppColors.line;
 
-void _comingSoon(BuildContext context, String feature) {
-  ScaffoldMessenger.of(context)
-    ..hideCurrentSnackBar()
-    ..showSnackBar(
-      SnackBar(
-        content: Text('$feature - segera hadir (prototype)'),
-        behavior: SnackBarBehavior.floating,
-        backgroundColor: _ink,
-      ),
-    );
-}
-
 /// Customer home screen.
 ///
 /// Layout: header, search, active order, promos, trust, urgency,
 /// categories, popular services, reviews, and all services.
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key, this.onOpenOrders, onOpenProfile});
+  const HomeScreen({super.key, this.onOpenOrders});
 
   /// Called when the active-order card is tapped (RootShell switches tabs).
   final VoidCallback? onOpenOrders;
@@ -81,8 +71,18 @@ class _HomeScreenState extends State<HomeScreen> {
                 const SliverToBoxAdapter(child: _UrgentCard()),
                 const SliverToBoxAdapter(child: _PromoCarousel()),
                 const SliverToBoxAdapter(child: _TrustStrip()),
-                const SliverToBoxAdapter(
-                  child: _SectionTitle('Layanan Populer'),
+                SliverToBoxAdapter(
+                  child: SectionTitle(
+                    'Layanan Populer',
+                    trailing: TextButton(
+                      onPressed: () => Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (_) => const AllServicesScreen(),
+                        ),
+                      ),
+                      child: const Text('Lihat semua'),
+                    ),
+                  ),
                 ),
                 SliverToBoxAdapter(
                   child: SizedBox(
@@ -97,9 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                 ),
-                const SliverToBoxAdapter(
-                  child: _SectionTitle('Kata Pelanggan'),
-                ),
+                const SliverToBoxAdapter(child: SectionTitle('Kata Pelanggan')),
                 SliverToBoxAdapter(
                   child: SizedBox(
                     height: 172,
@@ -158,9 +156,9 @@ class _Header extends StatelessWidget {
             shape: const CircleBorder(side: BorderSide(color: _line)),
             child: InkWell(
               customBorder: const CircleBorder(),
-              onTap: () => Navigator.of(context).push(
-                MaterialPageRoute(builder: (_) => const ProfileScreen()),
-              ),
+              onTap: () => Navigator.of(
+                context,
+              ).push(MaterialPageRoute(builder: (_) => const ProfileScreen())),
               child: const Padding(
                 padding: EdgeInsets.all(12),
                 child: Icon(
@@ -183,7 +181,7 @@ class _SearchBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.fromLTRB(20, 16, 20, 8),
+      padding: const EdgeInsets.fromLTRB(20, 16, 20, 8),
       child: Material(
         color: Colors.white,
         shape: RoundedRectangleBorder(
@@ -192,7 +190,7 @@ class _SearchBar extends StatelessWidget {
         ),
         child: InkWell(
           borderRadius: BorderRadius.circular(16),
-          onTap: () => _comingSoon(context, 'Pencarian'),
+          onTap: () => comingSoon(context, 'Pencarian'),
           child: const Padding(
             padding: EdgeInsets.symmetric(horizontal: 16, vertical: 15),
             child: Row(
@@ -214,8 +212,6 @@ class _SearchBar extends StatelessWidget {
     );
   }
 }
-
-
 
 class _Promo {
   const _Promo({
@@ -253,7 +249,7 @@ const _promos = [
     subtitle: 'Hasil kurang rapi?\nKami kerjakan ulang.',
     cta: 'Selengkapnya',
     icon: Icons.verified_user_rounded,
-    colors: [Color(0xFF1E3A8A), Color(0xFF2563EB)],
+    colors: [Color(0xFF1E3A8A), AppColors.blue],
   ),
 ];
 
@@ -383,7 +379,7 @@ class _PromoCard extends StatelessWidget {
                         ),
                         const SizedBox(height: 12),
                         GestureDetector(
-                          onTap: () => _comingSoon(context, promo.title),
+                          onTap: () => comingSoon(context, promo.title),
                           child: Container(
                             padding: const EdgeInsets.symmetric(
                               horizontal: 14,
@@ -511,12 +507,12 @@ class _UrgentCard extends StatelessWidget {
               width: 44,
               height: 44,
               decoration: BoxDecoration(
-                color: const Color(0xFFDC2626).withValues(alpha: 0.12),
+                color: AppColors.danger.withValues(alpha: 0.12),
                 borderRadius: BorderRadius.circular(14),
               ),
               child: const Icon(
                 Icons.bolt_rounded,
-                color: Color(0xFFDC2626),
+                color: AppColors.danger,
                 size: 26,
               ),
             ),
@@ -549,14 +545,14 @@ class _UrgentCard extends StatelessWidget {
             ),
             const SizedBox(width: 10),
             GestureDetector(
-              onTap: () => _comingSoon(context, 'Panggilan darurat'),
+              onTap: () => comingSoon(context, 'Panggilan darurat'),
               child: Container(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 14,
                   vertical: 9,
                 ),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFDC2626),
+                  color: AppColors.danger,
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: const Text(
@@ -815,28 +811,6 @@ class _HomeSkeleton extends StatelessWidget {
 // Sections
 // ---------------------------------------------------------------------------
 
-class _SectionTitle extends StatelessWidget {
-  const _SectionTitle(this.text);
-
-  final String text;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(20, 26, 20, 12),
-      child: Text(
-        text,
-        style: const TextStyle(
-          fontSize: 18,
-          fontWeight: FontWeight.w800,
-          letterSpacing: -0.1,
-          color: _ink,
-        ),
-      ),
-    );
-  }
-}
-
 class _CategoryTile extends StatelessWidget {
   const _CategoryTile({required this.category});
 
@@ -947,7 +921,7 @@ class _PopularCard extends StatelessWidget {
                         const Icon(
                           Icons.star_rounded,
                           size: 16,
-                          color: Color(0xFFF59E0B),
+                          color: AppColors.star,
                         ),
                         const SizedBox(width: 2),
                         Text(
@@ -978,5 +952,3 @@ class _PopularCard extends StatelessWidget {
     );
   }
 }
-
-

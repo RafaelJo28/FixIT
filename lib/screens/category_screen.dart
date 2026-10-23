@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../data/sample_data.dart';
 import '../models/models.dart';
 import 'service_detail_screen.dart';
+import '../theme.dart';
 
 /// Shows all services within a chosen category.
 class CategoryScreen extends StatelessWidget {
@@ -55,7 +56,7 @@ class _CategoryItem extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(18),
-          border: Border.all(color: const Color(0xFFE6EBF5)),
+          border: Border.all(color: AppColors.line),
         ),
         child: Row(
           children: [
@@ -73,37 +74,54 @@ class _CategoryItem extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(item.name,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                          fontSize: 15, fontWeight: FontWeight.w700)),
+                  Text(
+                    item.name,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
                   const SizedBox(height: 4),
                   Row(
                     children: [
-                      const Icon(Icons.star_rounded,
-                          color: Color(0xFFF59E0B), size: 15),
+                      const Icon(
+                        Icons.star_rounded,
+                        color: AppColors.star,
+                        size: 15,
+                      ),
                       const SizedBox(width: 3),
-                      Text(item.rating.toString(),
-                          style: const TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w600,
-                              color: Color(0xFF475569))),
+                      Text(
+                        item.rating.toString(),
+                        style: const TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                          color: AppColors.body,
+                        ),
+                      ),
                       const SizedBox(width: 10),
-                      Text('${item.durationMinutes} mnt',
-                          style: const TextStyle(
-                              fontSize: 12, color: Color(0xFF94A3B8))),
+                      Text(
+                        '${item.durationMinutes} mnt',
+                        style: const TextStyle(
+                          fontSize: 12,
+                          color: Color(0xFF94A3B8),
+                        ),
+                      ),
                     ],
                   ),
                 ],
               ),
             ),
             const SizedBox(width: 8),
-            Text(formatIdr(item.price),
-                style: const TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w800,
-                    color: Color(0xFF2563EB))),
+            Text(
+              formatIdr(item.price),
+              style: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w800,
+                color: AppColors.blue,
+              ),
+            ),
           ],
         ),
       ),

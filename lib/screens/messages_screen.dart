@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../data/sample_data.dart';
-import '../models/models.dart';
 import 'chat_screen.dart';
+import '../theme.dart';
 
 /// Simple conversations list. Tapping a worker opens a local chat screen.
 class MessagesScreen extends StatelessWidget {
@@ -23,20 +23,22 @@ class MessagesScreen extends StatelessWidget {
             final w = workers[i];
             return InkWell(
               borderRadius: BorderRadius.circular(14),
-              onTap: () => Navigator.of(context).push(
-                MaterialPageRoute(builder: (_) => ChatScreen(worker: w)),
-              ),
+              onTap: () => Navigator.of(
+                context,
+              ).push(MaterialPageRoute(builder: (_) => ChatScreen(worker: w))),
               child: Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(14),
-                  border: Border.all(color: const Color(0xFFE6EBF5)),
+                  border: Border.all(color: AppColors.line),
                 ),
                 child: Row(
                   children: [
                     CircleAvatar(
-                      backgroundColor: w.verified ? const Color(0xFFEFF6FF) : const Color(0xFFF3F4F6),
+                      backgroundColor: w.verified
+                          ? const Color(0xFFEFF6FF)
+                          : const Color(0xFFF3F4F6),
                       child: Text(w.name.split(' ').first),
                     ),
                     const SizedBox(width: 12),
@@ -44,14 +46,23 @@ class MessagesScreen extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(w.name, style: const TextStyle(fontWeight: FontWeight.w700)),
+                          Text(
+                            w.name,
+                            style: const TextStyle(fontWeight: FontWeight.w700),
+                          ),
                           const SizedBox(height: 4),
-                          Text(w.trade, style: const TextStyle(color: Color(0xFF64748B))),
+                          Text(
+                            w.trade,
+                            style: const TextStyle(color: AppColors.muted),
+                          ),
                         ],
                       ),
                     ),
                     const SizedBox(width: 8),
-                    const Icon(Icons.chevron_right_rounded, color: Color(0xFF94A3B8)),
+                    const Icon(
+                      Icons.chevron_right_rounded,
+                      color: Color(0xFF94A3B8),
+                    ),
                   ],
                 ),
               ),

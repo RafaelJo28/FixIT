@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../data/sample_data.dart';
 import '../models/models.dart';
+import '../theme.dart';
 
 /// Orders tab — placeholder list of (hard-coded) past/upcoming orders.
 class OrdersScreen extends StatelessWidget {
@@ -21,7 +22,7 @@ class OrdersScreen extends StatelessWidget {
             _OrderCard(
               service: ac,
               status: 'Menunggu teknisi',
-              statusColor: const Color(0xFFF59E0B),
+              statusColor: AppColors.star,
               schedule: 'Hari ini • 13:00',
             ),
             const SizedBox(height: 14),
@@ -60,7 +61,7 @@ class _OrderCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: const Color(0xFFE6EBF5)),
+        border: Border.all(color: AppColors.line),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -78,22 +79,31 @@ class _OrderCard extends StatelessWidget {
               ),
               const SizedBox(width: 14),
               Expanded(
-                child: Text(service.name,
-                    style: const TextStyle(
-                        fontSize: 15, fontWeight: FontWeight.w700)),
+                child: Text(
+                  service.name,
+                  style: const TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
               ),
               Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 6,
+                ),
                 decoration: BoxDecoration(
                   color: statusColor.withValues(alpha: 0.12),
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: Text(status,
-                    style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w700,
-                        color: statusColor)),
+                child: Text(
+                  status,
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w700,
+                    color: statusColor,
+                  ),
+                ),
               ),
             ],
           ),
@@ -105,19 +115,29 @@ class _OrderCard extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  const Icon(Icons.event_rounded,
-                      size: 16, color: Color(0xFF94A3B8)),
+                  const Icon(
+                    Icons.event_rounded,
+                    size: 16,
+                    color: Color(0xFF94A3B8),
+                  ),
                   const SizedBox(width: 6),
-                  Text(schedule,
-                      style: const TextStyle(
-                          fontSize: 13, color: Color(0xFF64748B))),
+                  Text(
+                    schedule,
+                    style: const TextStyle(
+                      fontSize: 13,
+                      color: AppColors.muted,
+                    ),
+                  ),
                 ],
               ),
-              Text(formatIdr(service.price),
-                  style: const TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w800,
-                      color: Color(0xFF2563EB))),
+              Text(
+                formatIdr(service.price),
+                style: const TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w800,
+                  color: AppColors.blue,
+                ),
+              ),
             ],
           ),
         ],

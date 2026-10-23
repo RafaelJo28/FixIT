@@ -26,10 +26,7 @@ class _RootShellState extends State<RootShell> {
       body: IndexedStack(
         index: _index,
         children: [
-          HomeScreen(
-            onOpenOrders: () => _goTo(1),
-            onOpenProfile: () => _goTo(3),
-          ),
+          HomeScreen(onOpenOrders: () => _goTo(1)),
           const OrdersScreen(),
           const MessagesScreen(),
           const FixieScreen(),

@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 /// This is intentionally local/in-memory. Real data will later come from
 /// a Neon (Postgres) backend — wiring is deferred to a later milestone.
 
-
 class ServiceCategory {
   const ServiceCategory({
     required this.id,
@@ -82,7 +81,8 @@ class Worker {
   final String id;
   final String name;
   final String trade; // e.g. "AC Technician"
-  final List<String> serviceIds; // service item ids this worker commonly performs
+  final List<String>
+  serviceIds; // service item ids this worker commonly performs
   final List<String> areas; // area names covered, e.g. "Depok / Bekasi"
   final double rating;
   final bool verified;

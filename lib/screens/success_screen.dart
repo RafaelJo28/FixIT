@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../data/sample_data.dart';
 import '../models/models.dart';
 import 'root_shell.dart';
+import '../theme.dart';
 
 /// Confirmation screen shown after a successful (simulated) payment.
 class SuccessScreen extends StatelessWidget {
@@ -32,23 +33,33 @@ class SuccessScreen extends StatelessWidget {
                 width: 96,
                 height: 96,
                 decoration: const BoxDecoration(
-                  color: Color(0xFF2563EB),
+                  color: AppColors.blue,
                   shape: BoxShape.circle,
                 ),
-                child: const Icon(Icons.check_rounded,
-                    color: Colors.white, size: 56),
+                child: const Icon(
+                  Icons.check_rounded,
+                  color: Colors.white,
+                  size: 56,
+                ),
               ),
               const SizedBox(height: 24),
-              const Text('Pemesanan Berhasil!',
-                  style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.w800,
-                      letterSpacing: -0.5)),
+              const Text(
+                'Pemesanan Berhasil!',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.w800,
+                  letterSpacing: -0.5,
+                ),
+              ),
               const SizedBox(height: 8),
               const Text(
                 'Pembayaran berhasil! Teknisi akan segera mengupdate kamu melalui Pesan dalam aplikasi.',
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 14, height: 1.5, color: Color(0xFF64748B)),
+                style: TextStyle(
+                  fontSize: 14,
+                  height: 1.5,
+                  color: AppColors.muted,
+                ),
               ),
               const SizedBox(height: 28),
               Container(
@@ -57,7 +68,7 @@ class SuccessScreen extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: const Color(0xFFE6EBF5)),
+                  border: Border.all(color: AppColors.line),
                 ),
                 child: Column(
                   children: [
@@ -73,14 +84,21 @@ class SuccessScreen extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text('Total dibayar',
-                            style: TextStyle(
-                                fontSize: 14, color: Color(0xFF64748B))),
-                        Text(formatIdr(total),
-                            style: const TextStyle(
-                                fontSize: 17,
-                                fontWeight: FontWeight.w800,
-                                color: Color(0xFF2563EB))),
+                        const Text(
+                          'Total dibayar',
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: AppColors.muted,
+                          ),
+                        ),
+                        Text(
+                          formatIdr(total),
+                          style: const TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.w800,
+                            color: AppColors.blue,
+                          ),
+                        ),
                       ],
                     ),
                   ],
@@ -110,17 +128,21 @@ class SuccessScreen extends StatelessWidget {
       children: [
         SizedBox(
           width: 90,
-          child: Text(label,
-              style:
-                  const TextStyle(fontSize: 13, color: Color(0xFF94A3B8))),
+          child: Text(
+            label,
+            style: const TextStyle(fontSize: 13, color: Color(0xFF94A3B8)),
+          ),
         ),
         Expanded(
-          child: Text(value,
-              textAlign: TextAlign.right,
-              style: const TextStyle(
-                  fontSize: 13.5,
-                  fontWeight: FontWeight.w600,
-                  color: Color(0xFF0F172A))),
+          child: Text(
+            value,
+            textAlign: TextAlign.right,
+            style: const TextStyle(
+              fontSize: 13.5,
+              fontWeight: FontWeight.w600,
+              color: AppColors.ink,
+            ),
+          ),
         ),
       ],
     );

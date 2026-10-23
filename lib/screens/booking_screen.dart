@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../data/sample_data.dart';
 import '../models/models.dart';
 import 'checkout_screen.dart';
+import '../theme.dart';
 
 /// Step 1 of booking: pick a date, time slot, and address, then continue.
 class BookingScreen extends StatefulWidget {
@@ -37,8 +38,18 @@ class _BookingScreenState extends State<BookingScreen> {
   }
 
   static const _monthNames = [
-    'Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun',
-    'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des',
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'Mei',
+    'Jun',
+    'Jul',
+    'Agu',
+    'Sep',
+    'Okt',
+    'Nov',
+    'Des',
   ];
 
   bool get _canContinue => _slotIndex != null;
@@ -80,7 +91,7 @@ class _BookingScreenState extends State<BookingScreen> {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: const Color(0xFFE6EBF5)),
+        border: Border.all(color: AppColors.line),
       ),
       child: Row(
         children: [
@@ -98,23 +109,34 @@ class _BookingScreenState extends State<BookingScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(widget.item.name,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                        fontSize: 15, fontWeight: FontWeight.w700)),
+                Text(
+                  widget.item.name,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
                 const SizedBox(height: 4),
-                Text('${widget.item.durationMinutes} menit',
-                    style: const TextStyle(
-                        fontSize: 12, color: Color(0xFF94A3B8))),
+                Text(
+                  '${widget.item.durationMinutes} menit',
+                  style: const TextStyle(
+                    fontSize: 12,
+                    color: Color(0xFF94A3B8),
+                  ),
+                ),
               ],
             ),
           ),
-          Text(formatIdr(widget.item.price),
-              style: const TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w800,
-                  color: Color(0xFF2563EB))),
+          Text(
+            formatIdr(widget.item.price),
+            style: const TextStyle(
+              fontSize: 15,
+              fontWeight: FontWeight.w800,
+              color: AppColors.blue,
+            ),
+          ),
         ],
       ),
     );
@@ -136,38 +158,43 @@ class _BookingScreenState extends State<BookingScreen> {
             child: Container(
               width: 62,
               decoration: BoxDecoration(
-                color: selected ? const Color(0xFF2563EB) : Colors.white,
+                color: selected ? AppColors.blue : Colors.white,
                 borderRadius: BorderRadius.circular(16),
                 border: Border.all(
-                  color: selected
-                      ? const Color(0xFF2563EB)
-                      : const Color(0xFFE6EBF5),
+                  color: selected ? AppColors.blue : AppColors.line,
                 ),
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(d.label,
-                      style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w600,
-                          color: selected
-                              ? Colors.white70
-                              : const Color(0xFF94A3B8))),
+                  Text(
+                    d.label,
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                      color: selected
+                          ? Colors.white70
+                          : const Color(0xFF94A3B8),
+                    ),
+                  ),
                   const SizedBox(height: 4),
-                  Text('${d.date}',
-                      style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w800,
-                          color: selected
-                              ? Colors.white
-                              : const Color(0xFF0F172A))),
-                  Text(d.month,
-                      style: TextStyle(
-                          fontSize: 11,
-                          color: selected
-                              ? Colors.white70
-                              : const Color(0xFF94A3B8))),
+                  Text(
+                    '${d.date}',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w800,
+                      color: selected ? Colors.white : AppColors.ink,
+                    ),
+                  ),
+                  Text(
+                    d.month,
+                    style: TextStyle(
+                      fontSize: 11,
+                      color: selected
+                          ? Colors.white70
+                          : const Color(0xFF94A3B8),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -198,21 +225,20 @@ class _BookingScreenState extends State<BookingScreen> {
               padding: const EdgeInsets.symmetric(vertical: 12),
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                color: selected ? const Color(0xFF2563EB) : Colors.white,
+                color: selected ? AppColors.blue : Colors.white,
                 borderRadius: BorderRadius.circular(14),
                 border: Border.all(
-                  color: selected
-                      ? const Color(0xFF2563EB)
-                      : const Color(0xFFE6EBF5),
+                  color: selected ? AppColors.blue : AppColors.line,
                 ),
               ),
-              child: Text(s.label,
-                  style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w700,
-                      color: selected
-                          ? Colors.white
-                          : const Color(0xFF0F172A))),
+              child: Text(
+                s.label,
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w700,
+                  color: selected ? Colors.white : AppColors.ink,
+                ),
+              ),
             ),
           ),
         );
@@ -239,7 +265,7 @@ class _BookingScreenState extends State<BookingScreen> {
       padding: const EdgeInsets.fromLTRB(20, 14, 20, 16),
       decoration: const BoxDecoration(
         color: Colors.white,
-        border: Border(top: BorderSide(color: Color(0xFFE6EBF5))),
+        border: Border(top: BorderSide(color: AppColors.line)),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -249,14 +275,20 @@ class _BookingScreenState extends State<BookingScreen> {
               padding: const EdgeInsets.only(bottom: 10),
               child: Row(
                 children: [
-                  const Icon(Icons.event_rounded,
-                      size: 16, color: Color(0xFF2563EB)),
+                  const Icon(
+                    Icons.event_rounded,
+                    size: 16,
+                    color: AppColors.blue,
+                  ),
                   const SizedBox(width: 6),
-                  Text('$day • $slotLabel',
-                      style: const TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.w600,
-                          color: Color(0xFF475569))),
+                  Text(
+                    '$day • $slotLabel',
+                    style: const TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600,
+                      color: AppColors.body,
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -265,14 +297,14 @@ class _BookingScreenState extends State<BookingScreen> {
             child: ElevatedButton(
               onPressed: ready
                   ? () => Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (_) => CheckoutScreen(
-                            item: widget.item,
-                            schedule: '$day • $slotLabel',
-                            address: _address,
-                          ),
+                      MaterialPageRoute(
+                        builder: (_) => CheckoutScreen(
+                          item: widget.item,
+                          schedule: '$day • $slotLabel',
+                          address: _address,
                         ),
-                      )
+                      ),
+                    )
                   : null,
               child: Text(ready ? 'Lanjut ke Pembayaran' : 'Pilih jam dulu'),
             ),
@@ -284,8 +316,6 @@ class _BookingScreenState extends State<BookingScreen> {
 }
 
 class _Day {
-
-
   const _Day({
     required this.label,
     required this.date,
@@ -306,7 +336,9 @@ class _StepLabel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(text,
-        style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w700));
+    return Text(
+      text,
+      style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
+    );
   }
 }

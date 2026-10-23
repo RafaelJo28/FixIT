@@ -11,6 +11,8 @@ class AppColors {
   static const bg = Color(0xFFF6F8FC);
   static const blue = Color(0xFF2563EB);
   static const star = Color(0xFFF59E0B);
+  static const success = Color(0xFF15803D);
+  static const danger = Color(0xFFDC2626);
 }
 
 class AppTheme {
@@ -26,8 +28,10 @@ class AppTheme {
       colorScheme: scheme,
       fontFamily: GoogleFonts.plusJakartaSans().fontFamily,
     );
-    final textTheme = base.textTheme
-        .apply(bodyColor: AppColors.ink, displayColor: AppColors.ink);
+    final textTheme = base.textTheme.apply(
+      bodyColor: AppColors.ink,
+      displayColor: AppColors.ink,
+    );
 
     final buttonText = GoogleFonts.plusJakartaSans(
       fontSize: 16,
@@ -85,8 +89,10 @@ class AppTheme {
         filled: true,
         fillColor: Colors.white,
         hintStyle: const TextStyle(color: AppColors.muted),
-        contentPadding:
-            const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: 14,
+        ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
           borderSide: const BorderSide(color: AppColors.line),
@@ -101,9 +107,7 @@ class AppTheme {
         ),
       ),
       chipTheme: ChipThemeData(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         side: BorderSide.none,
       ),
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
@@ -113,10 +117,7 @@ class AppTheme {
         type: BottomNavigationBarType.fixed,
         elevation: 0,
       ),
-      dividerTheme: const DividerThemeData(
-        color: AppColors.line,
-        thickness: 1,
-      ),
+      dividerTheme: const DividerThemeData(color: AppColors.line, thickness: 1),
     );
   }
 }

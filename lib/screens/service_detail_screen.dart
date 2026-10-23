@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../data/sample_data.dart';
 import '../models/models.dart';
 import 'booking_screen.dart';
+import '../theme.dart';
 
 /// Detailed view of a single service with a "Book" action.
 class ServiceDetailScreen extends StatelessWidget {
@@ -37,8 +38,11 @@ class ServiceDetailScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(24),
                     ),
                     child: Center(
-                      child: Icon(category.icon,
-                          size: 72, color: category.color),
+                      child: Icon(
+                        category.icon,
+                        size: 72,
+                        color: category.color,
+                      ),
                     ),
                   ),
                   const SizedBox(height: 20),
@@ -46,28 +50,39 @@ class ServiceDetailScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Expanded(
-                        child: Text(item.name,
-                            style: const TextStyle(
-                                fontSize: 22,
-                                fontWeight: FontWeight.w800,
-                                letterSpacing: -0.4)),
+                        child: Text(
+                          item.name,
+                          style: const TextStyle(
+                            fontSize: 22,
+                            fontWeight: FontWeight.w800,
+                            letterSpacing: -0.4,
+                          ),
+                        ),
                       ),
                       Container(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 10, vertical: 6),
+                          horizontal: 10,
+                          vertical: 6,
+                        ),
                         decoration: BoxDecoration(
                           color: const Color(0xFFFFF7ED),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Row(
                           children: [
-                            const Icon(Icons.star_rounded,
-                                color: Color(0xFFF59E0B), size: 16),
+                            const Icon(
+                              Icons.star_rounded,
+                              color: AppColors.star,
+                              size: 16,
+                            ),
                             const SizedBox(width: 4),
-                            Text(item.rating.toString(),
-                                style: const TextStyle(
-                                    fontSize: 13,
-                                    fontWeight: FontWeight.w700)),
+                            Text(
+                              item.rating.toString(),
+                              style: const TextStyle(
+                                fontSize: 13,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
                           ],
                         ),
                       ),
@@ -77,24 +92,30 @@ class ServiceDetailScreen extends StatelessWidget {
                   Row(
                     children: [
                       _MetaChip(
-                          icon: Icons.schedule_rounded,
-                          label: '${item.durationMinutes} menit'),
+                        icon: Icons.schedule_rounded,
+                        label: '${item.durationMinutes} menit',
+                      ),
                       const SizedBox(width: 10),
                       _MetaChip(
-                          icon: Icons.category_outlined,
-                          label: category.name),
+                        icon: Icons.category_outlined,
+                        label: category.name,
+                      ),
                     ],
                   ),
                   const SizedBox(height: 20),
-                  const Text('Tentang layanan',
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.w700)),
+                  const Text(
+                    'Tentang layanan',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+                  ),
                   const SizedBox(height: 8),
-                  Text(item.description,
-                      style: const TextStyle(
-                          fontSize: 14,
-                          height: 1.5,
-                          color: Color(0xFF475569))),
+                  Text(
+                    item.description,
+                    style: const TextStyle(
+                      fontSize: 14,
+                      height: 1.5,
+                      color: AppColors.body,
+                    ),
+                  ),
                   const SizedBox(height: 20),
                   Container(
                     padding: const EdgeInsets.all(16),
@@ -105,16 +126,20 @@ class ServiceDetailScreen extends StatelessWidget {
                     ),
                     child: const Row(
                       children: [
-                        Icon(Icons.verified_user_rounded,
-                            color: Color(0xFF2563EB), size: 22),
+                        Icon(
+                          Icons.verified_user_rounded,
+                          color: AppColors.blue,
+                          size: 22,
+                        ),
                         SizedBox(width: 12),
                         Expanded(
                           child: Text(
                             'Dikerjakan teknisi terverifikasi. Garansi pekerjaan 30 hari.',
                             style: TextStyle(
-                                fontSize: 13,
-                                fontWeight: FontWeight.w600,
-                                color: Color(0xFF1E3A8A)),
+                              fontSize: 13,
+                              fontWeight: FontWeight.w600,
+                              color: Color(0xFF1E3A8A),
+                            ),
                           ),
                         ),
                       ],
@@ -144,18 +169,21 @@ class _MetaChip extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: const Color(0xFFE6EBF5)),
+        border: Border.all(color: AppColors.line),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, size: 15, color: const Color(0xFF64748B)),
+          Icon(icon, size: 15, color: AppColors.muted),
           const SizedBox(width: 6),
-          Text(label,
-              style: const TextStyle(
-                  fontSize: 12.5,
-                  fontWeight: FontWeight.w600,
-                  color: Color(0xFF475569))),
+          Text(
+            label,
+            style: const TextStyle(
+              fontSize: 12.5,
+              fontWeight: FontWeight.w600,
+              color: AppColors.body,
+            ),
+          ),
         ],
       ),
     );
@@ -173,7 +201,7 @@ class _BottomBar extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(20, 14, 20, 16),
       decoration: const BoxDecoration(
         color: Colors.white,
-        border: Border(top: BorderSide(color: Color(0xFFE6EBF5))),
+        border: Border(top: BorderSide(color: AppColors.line)),
       ),
       child: Row(
         children: [
@@ -181,22 +209,25 @@ class _BottomBar extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Text('Mulai dari',
-                  style: TextStyle(fontSize: 12, color: Color(0xFF94A3B8))),
-              Text(formatIdr(item.price),
-                  style: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w800,
-                      color: Color(0xFF2563EB))),
+              const Text(
+                'Mulai dari',
+                style: TextStyle(fontSize: 12, color: Color(0xFF94A3B8)),
+              ),
+              Text(
+                formatIdr(item.price),
+                style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w800,
+                  color: AppColors.blue,
+                ),
+              ),
             ],
           ),
           const SizedBox(width: 16),
           Expanded(
             child: ElevatedButton(
               onPressed: () => Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (_) => BookingScreen(item: item),
-                ),
+                MaterialPageRoute(builder: (_) => BookingScreen(item: item)),
               ),
               child: const Text('Pesan Sekarang'),
             ),
@@ -206,4 +237,3 @@ class _BottomBar extends StatelessWidget {
     );
   }
 }
-

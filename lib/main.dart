@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 
-import 'screens/root_shell.dart';
+import 'auth/welcome_screen.dart';
 import 'theme.dart';
 
 void main() {
   runApp(const FixITApp());
 }
 
-/// Root application widget for the FixIT customer app.
+/// Root application widget for FixIT.
+///
+/// The app starts on the role-selection screen: the customer and the vendor
+/// each sign in through their own flow and land in their own app.
 class FixITApp extends StatelessWidget {
   const FixITApp({super.key});
 
@@ -17,7 +20,7 @@ class FixITApp extends StatelessWidget {
       title: 'FixIT',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.light(),
-      home: const RootShell(),
+      home: const WelcomeScreen(),
     );
   }
 }

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 
 import '../auth/welcome_screen.dart';
+import '../data/specialties.dart';
+import '../data/worker_directory.dart';
 import '../theme.dart';
 import '../widgets/common.dart';
+import 'portfolio_editor.dart';
 import 'vendor_store.dart';
 
 const _green = AppColors.success;
@@ -10,9 +13,6 @@ const _amber = Color(0xFFB45309);
 
 class VendorProfileScreen extends StatelessWidget {
   const VendorProfileScreen({super.key});
-
-  static const _skills = ['Servis AC', 'Listrik'];
-  static const _areas = ['Depok', 'Bekasi'];
 
   Future<void> _logout(BuildContext context) async {
     final ok = await showDialog<bool>(
@@ -43,12 +43,14 @@ class VendorProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final store = VendorStore.instance;
+    final directory = WorkerDirectory.instance;
 
     return Scaffold(
       appBar: AppBar(title: const Text('Profil')),
       body: ListenableBuilder(
-        listenable: store,
+        listenable: Listenable.merge([directory, store]),
         builder: (context, _) {
+          final me = directory.me;
           return ListView(
             padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),
             children: [
@@ -57,11 +59,11 @@ class VendorProfileScreen extends StatelessWidget {
                 decoration: cardDecoration(radius: 20),
                 child: Row(
                   children: [
-                    const CircleAvatar(
+                    CircleAvatar(
                       radius: 30,
                       backgroundColor: AppColors.blue,
                       child: Text(
-                        'H',
+                        me.name.isEmpty ? '?' : me.name[0].toUpperCase(),
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 24,
@@ -74,8 +76,8 @@ class VendorProfileScreen extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            'Hendra Saputra',
+                          Text(
+                            me.name,
                             style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.w800,
@@ -117,14 +119,18 @@ class VendorProfileScreen extends StatelessWidget {
               Wrap(
                 spacing: 8,
                 runSpacing: 8,
-                children: [for (final s in _skills) _Pill(label: s)],
+                children: [
+                  for (final id in orderedSpecialties(me.specialtyIds))
+                    _Pill(label: specialtyById(id).name),
+                ],
               ),
               const SectionTitle('Wilayah layanan'),
               Wrap(
                 spacing: 8,
                 runSpacing: 8,
                 children: [
-                  for (final a in _areas) _Pill(label: a, icon: Icons.place),
+                  for (final area in me.areas)
+                    _Pill(label: area, icon: Icons.place),
                 ],
               ),
               const SectionTitle('Verifikasi akun'),
@@ -164,6 +170,16 @@ class VendorProfileScreen extends StatelessWidget {
                 decoration: cardDecoration(),
                 child: Column(
                   children: [
+                    _MenuRow(
+                      icon: Icons.person_outline_rounded,
+                      label: 'Profil publik',
+                      onTap: () => Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (_) => const VendorPortfolioScreen(),
+                        ),
+                      ),
+                    ),
+                    const Divider(height: 1),
                     _MenuRow(
                       icon: Icons.account_balance_outlined,
                       label: 'Rekening bank',

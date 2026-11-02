@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import 'package:fixit/data/worker_directory.dart';
 import 'package:fixit/theme.dart';
+import 'package:fixit/vendor/portfolio_editor.dart';
 import 'package:fixit/vendor/vendor_earnings_screen.dart';
 import 'package:fixit/vendor/vendor_home_screen.dart';
 import 'package:fixit/vendor/vendor_job_detail_screen.dart';
@@ -33,9 +35,28 @@ void main() {
   });
 
   testWidgets('vendor profile renders', (tester) async {
+    tester.view.physicalSize = const Size(800, 1000);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
     await tester.pumpWidget(wrap(const VendorProfileScreen()));
     await tester.pumpAndSettle();
     expect(find.text('Rekening bank'), findsWidgets);
+    expect(find.text('Profil publik'), findsOneWidget);
+    await tester.scrollUntilVisible(
+      find.text('Profil publik'),
+      300,
+      scrollable: find.byType(Scrollable).first,
+    );
+    await tester.tap(find.text('Profil publik'));
+    await tester.pumpAndSettle();
+    expect(find.byType(VendorPortfolioScreen), findsOneWidget);
+    expect(find.text('Tentang saya'), findsOneWidget);
+    expect(
+      tester.widget<TextField>(find.byType(TextField)).controller?.text,
+      WorkerDirectory.instance.me.bio,
+    );
   });
 
   testWidgets('vendor messages list renders clients', (tester) async {

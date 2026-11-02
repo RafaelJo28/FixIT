@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
+import '../data/worker_directory.dart';
 import '../theme.dart';
 import '../widgets/common.dart';
+import '../widgets/worker_widgets.dart';
 import 'vendor_job_detail_screen.dart';
 import 'vendor_models.dart';
 import 'vendor_profile_screen.dart';
@@ -29,7 +31,7 @@ class VendorHomeScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const _VendorHeader(),
+                  _VendorHeader(),
                   _OnlineCard(store: store),
                   _StatsRow(store: store),
                   if (active.isNotEmpty) ...[
@@ -70,30 +72,23 @@ class _VendorHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final me = WorkerDirectory.instance.me;
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
       child: Row(
         children: [
-          const CircleAvatar(
-            radius: 24,
-            backgroundColor: AppColors.blue,
-            child: Text(
-              'H',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 20,
-                fontWeight: FontWeight.w800,
-              ),
-            ),
-          ),
+          WorkerAvatar(name: me.name, size: 48),
           const SizedBox(width: 12),
-          const Expanded(
+          Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Halo, Pak Hendra',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800),
+                  'Halo, ${me.honorific} ${me.firstName}',
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w800,
+                  ),
                 ),
                 SizedBox(height: 2),
                 Row(

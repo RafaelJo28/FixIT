@@ -154,7 +154,7 @@ class VendorJobDetailScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       _MoneyRow(
-                        label: 'Harga layanan',
+                        label: 'Tarif kunjungan',
                         value: rupiah(job.price),
                       ),
                       const SizedBox(height: 8),

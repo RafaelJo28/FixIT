@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 
-import 'vendor_models.dart';
+import '../data/worker_directory.dart';
 import '../theme.dart';
+import 'vendor_models.dart';
 
 class VendorStore extends ChangeNotifier {
   VendorStore._() {
     _seed();
+    // Rebuild vendor screens whenever the public profile changes.
+    WorkerDirectory.instance.addListener(notifyListeners);
   }
 
   static final VendorStore instance = VendorStore._();
 
-  final double rating = 4.8;
+  double get rating => WorkerDirectory.instance.me.rating;
 
   bool online = true;
   int balance = 0;

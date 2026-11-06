@@ -64,7 +64,7 @@ class WelcomeScreen extends StatelessWidget {
               const SizedBox(height: 28),
               _RoleCard(
                 icon: Icons.home_repair_service_rounded,
-                color: AppColors.blue,
+                color: AppColors.royalPurple,
                 title: 'Saya butuh tukang',
                 subtitle: 'Pesan servis AC, listrik, pipa, dan lainnya dengan harga yang jelas.',
                 onTap: () => _open(context, UserRole.customer),
@@ -72,7 +72,7 @@ class WelcomeScreen extends StatelessWidget {
               const SizedBox(height: 14),
               _RoleCard(
                 icon: Icons.handyman_rounded,
-                color: const Color(0xFF0369A1),
+                color: AppColors.sunglowGold,
                 title: 'Saya tukang / mitra',
                 subtitle:
                     'Terima pekerjaan di sekitarmu dan atur jadwalmu sendiri.',

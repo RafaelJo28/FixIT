@@ -4,6 +4,7 @@ import '../data/sample_data.dart';
 import '../models/models.dart';
 import 'service_detail_screen.dart';
 import '../theme.dart';
+import '../widgets/common.dart';
 
 /// Page showing every available service (opened from "Lainnya" on home).
 class AllServicesScreen extends StatelessWidget {
@@ -105,7 +106,7 @@ class _ServiceRow extends StatelessWidget {
             ),
             const SizedBox(width: 8),
             Text(
-              formatIdr(item.price),
+              rupiah(item.price),
               style: const TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w800,

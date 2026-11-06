@@ -5,6 +5,7 @@ import '../data/specialties.dart';
 import '../data/worker_directory.dart';
 import '../theme.dart';
 import '../widgets/common.dart';
+import '../widgets/worker_widgets.dart';
 import 'portfolio_editor.dart';
 import 'vendor_store.dart';
 
@@ -33,6 +34,8 @@ class VendorProfileScreen extends StatelessWidget {
       ),
     );
     if (ok == true && context.mounted) {
+      WorkerDirectory.instance.reset();
+      VendorStore.instance.reset();
       Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(builder: (_) => const WelcomeScreen()),
         (route) => false,
@@ -121,7 +124,7 @@ class VendorProfileScreen extends StatelessWidget {
                 runSpacing: 8,
                 children: [
                   for (final id in orderedSpecialties(me.specialtyIds))
-                    _Pill(label: specialtyById(id).name),
+                    InfoPill(label: specialtyById(id).name),
                 ],
               ),
               const SectionTitle('Wilayah layanan'),
@@ -130,7 +133,7 @@ class VendorProfileScreen extends StatelessWidget {
                 runSpacing: 8,
                 children: [
                   for (final area in me.areas)
-                    _Pill(label: area, icon: Icons.place),
+                    InfoPill(label: area, icon: Icons.place),
                 ],
               ),
               const SectionTitle('Verifikasi akun'),
@@ -215,40 +218,6 @@ class VendorProfileScreen extends StatelessWidget {
   }
 }
 
-class _Pill extends StatelessWidget {
-  const _Pill({required this.label, this.icon});
-
-  final String label;
-  final IconData? icon;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-      decoration: BoxDecoration(
-        color: AppColors.blue.withValues(alpha: 0.10),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          if (icon != null) ...[
-            Icon(icon, size: 14, color: AppColors.blue),
-            const SizedBox(width: 4),
-          ],
-          Text(
-            label,
-            style: const TextStyle(
-              fontSize: 13,
-              fontWeight: FontWeight.w700,
-              color: AppColors.blue,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
 
 class _VerifyRow extends StatelessWidget {
   const _VerifyRow({

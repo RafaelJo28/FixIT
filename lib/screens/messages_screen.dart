@@ -37,7 +37,7 @@ class MessagesScreen extends StatelessWidget {
                   children: [
                     CircleAvatar(
                       backgroundColor: w.verified
-                          ? const Color(0xFFEFF6FF)
+                          ? AppColors.purpleTint
                           : const Color(0xFFF3F4F6),
                       child: Text(w.name.split(' ').first),
                     ),

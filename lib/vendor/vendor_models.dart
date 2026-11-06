@@ -18,10 +18,10 @@ extension JobStatusX on JobStatus {
   };
 
   Color get color => switch (this) {
-    JobStatus.newRequest => const Color(0xFFB45309),
-    JobStatus.accepted => AppColors.blue,
-    JobStatus.onTheWay => const Color(0xFF7C3AED),
-    JobStatus.inProgress => const Color(0xFF0369A1),
+    JobStatus.newRequest => AppColors.sunglowGold,
+    JobStatus.accepted => AppColors.royalPurple,
+    JobStatus.onTheWay => const Color(0xFF9065E8),
+    JobStatus.inProgress => const Color(0xFF4E1FAD),
     JobStatus.completed => AppColors.success,
   };
 
@@ -63,6 +63,10 @@ class Job {
     required this.price,
     required this.note,
     required this.status,
+    this.workerId = 'me',
+    this.workerName = 'Hendra Saputra',
+    this.serviceId,
+    this.reviewed = false,
   });
 
   final String id;
@@ -78,6 +82,10 @@ class Job {
   final int price;
   final String note;
   JobStatus status;
+  final String workerId;
+  final String workerName;
+  final String? serviceId;
+  bool reviewed;
 
   int get commission => (price * kCommissionRate).round();
   int get net => price - commission;

@@ -65,8 +65,11 @@ class _ClientTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       borderRadius: BorderRadius.circular(14),
-      onTap: () => Navigator.of(context)
-          .push(MaterialPageRoute(builder: (_) => ChatScreen(worker: client))),
+      onTap: () => Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (_) => ChatScreen(worker: client, isVendor: true),
+        ),
+      ),
       child: Container(
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
@@ -78,7 +81,7 @@ class _ClientTile extends StatelessWidget {
           children: [
             CircleAvatar(
               backgroundColor: client.verified
-                  ? const Color(0xFFEFF6FF)
+                  ? AppColors.purpleTint
                   : const Color(0xFFF3F4F6),
               child: Text(client.name.split(' ').first),
             ),

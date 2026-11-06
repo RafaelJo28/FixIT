@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../models/models.dart';
+import '../screens/chat_screen.dart';
 import '../theme.dart';
 import '../widgets/common.dart';
 import 'vendor_models.dart';
@@ -224,7 +226,24 @@ class _ActionBar extends StatelessWidget {
       content = Row(
         children: [
           OutlinedButton(
-            onPressed: () => comingSoon(context, 'Chat pelanggan'),
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (_) => ChatScreen(
+                  worker: Worker(
+                    id: job.customerName,
+                    name: job.customerName,
+                    trade: job.area,
+                    serviceIds: const [],
+                    areas: [job.area],
+                    rating: 0,
+                    verified: false,
+                    certifications: const [],
+                    priceMultiplier: 1,
+                  ),
+                  isVendor: true,
+                ),
+              ),
+            ),
             child: const Icon(Icons.chat_bubble_outline_rounded),
           ),
           const SizedBox(width: 12),

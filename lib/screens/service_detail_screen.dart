@@ -4,6 +4,7 @@ import '../data/sample_data.dart';
 import '../models/models.dart';
 import 'booking_screen.dart';
 import '../theme.dart';
+import '../widgets/common.dart';
 
 /// Detailed view of a single service with a "Book" action.
 class ServiceDetailScreen extends StatelessWidget {
@@ -120,15 +121,15 @@ class ServiceDetailScreen extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
-                      color: const Color(0xFFEFF6FF),
+                      color: AppColors.purpleTint,
                       borderRadius: BorderRadius.circular(18),
-                      border: Border.all(color: const Color(0xFFD6E6FF)),
+                      border: Border.all(color: AppColors.purpleBorder),
                     ),
                     child: const Row(
                       children: [
                         Icon(
                           Icons.verified_user_rounded,
-                          color: AppColors.blue,
+                          color: AppColors.royalPurple,
                           size: 22,
                         ),
                         SizedBox(width: 12),
@@ -138,7 +139,7 @@ class ServiceDetailScreen extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 13,
                               fontWeight: FontWeight.w600,
-                              color: Color(0xFF1E3A8A),
+                              color: AppColors.purpleDark,
                             ),
                           ),
                         ),
@@ -214,7 +215,7 @@ class _BottomBar extends StatelessWidget {
                 style: TextStyle(fontSize: 12, color: Color(0xFF94A3B8)),
               ),
               Text(
-                formatIdr(item.price),
+                rupiah(item.price),
                 style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.w800,

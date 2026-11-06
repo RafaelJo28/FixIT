@@ -43,7 +43,7 @@ class _VendorApplyScreenState extends State<VendorApplyScreen> {
   bool _ktp = false;
   bool _selfie = false;
   bool _cert = false;
-  bool _lainnya = false;
+  final bool _lainnya = false;
 
   @override
   void initState() {

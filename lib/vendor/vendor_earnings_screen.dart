@@ -83,7 +83,7 @@ class _BalanceCard extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(22),
           gradient: const LinearGradient(
-            colors: [Color(0xFF1E3A8A), AppColors.blue],
+            colors: [Color(0xFF45199A), AppColors.royalPurple],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),

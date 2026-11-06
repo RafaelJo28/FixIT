@@ -6,12 +6,12 @@ import '../theme.dart';
 import 'common.dart';
 
 const _avatarColors = [
-  AppColors.blue,
-  Color(0xFF0369A1),
-  Color(0xFF4F46E5),
-  Color(0xFF0891B2),
-  Color(0xFF7C3AED),
-  AppColors.success,
+  AppColors.royalPurple,
+  AppColors.sunglowGold,
+  Color(0xFF5825BA),
+  Color(0xFF9065E8),
+  Color(0xFFD99026),
+  Color(0xFF4E1FAD),
 ];
 
 Color avatarColorFor(String key) {

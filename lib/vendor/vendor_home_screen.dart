@@ -150,7 +150,7 @@ class _OnlineCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(22),
           gradient: LinearGradient(
             colors: online
-                ? const [Color(0xFF1D4ED8), Color(0xFF3B82F6)]
+                ? const [Color(0xFF723CD6), Color(0xFF9065E8)]
                 : const [AppColors.body, AppColors.muted],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,

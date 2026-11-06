@@ -15,37 +15,37 @@ class SampleData {
       id: 'ac',
       name: 'Servis AC',
       icon: Icons.ac_unit_rounded,
-      color: Color(0xFF2563EB),
+      color: Color(0xFF723CD6),
     ),
     ServiceCategory(
       id: 'cleaning',
       name: 'Kebersihan Rumah',
       icon: Icons.cleaning_services_rounded,
-      color: Color(0xFF0EA5E9),
+      color: Color(0xFFEDB158),
     ),
     ServiceCategory(
       id: 'plumbing',
       name: 'Pipa & Ledeng',
       icon: Icons.plumbing_rounded,
-      color: Color(0xFF0284C7),
+      color: Color(0xFF5A25BF),
     ),
     ServiceCategory(
       id: 'electrical',
       name: 'Listrik',
       icon: Icons.electrical_services_rounded,
-      color: Color(0xFF1D4ED8),
+      color: Color(0xFFD99026),
     ),
     ServiceCategory(
       id: 'painting',
       name: 'Cat & Dekorasi',
       icon: Icons.format_paint_rounded,
-      color: Color(0xFF3B82F6),
+      color: Color(0xFF8E60EC),
     ),
     ServiceCategory(
       id: 'general',
       name: 'Lainnya',
       icon: Icons.apps_rounded,
-      color: Color(0xFF1E40AF),
+      color: Color(0xFF3B1578),
     ),
   ];
 
@@ -319,15 +319,3 @@ class SampleData {
       services.firstWhere((s) => s.id == id);
 }
 
-/// Formats an integer amount as Indonesian Rupiah, e.g. 95000 -> "Rp95.000".
-String formatIdr(int amount) {
-  final s = amount.toString();
-  final buf = StringBuffer();
-  for (var i = 0; i < s.length; i++) {
-    if (i > 0 && (s.length - i) % 3 == 0) {
-      buf.write('.');
-    }
-    buf.write(s[i]);
-  }
-  return 'Rp$buf';
-}

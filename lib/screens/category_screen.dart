@@ -4,6 +4,7 @@ import '../data/sample_data.dart';
 import '../models/models.dart';
 import 'service_detail_screen.dart';
 import '../theme.dart';
+import '../widgets/common.dart';
 
 /// Shows all services within a chosen category.
 class CategoryScreen extends StatelessWidget {
@@ -115,7 +116,7 @@ class _CategoryItem extends StatelessWidget {
             ),
             const SizedBox(width: 8),
             Text(
-              formatIdr(item.price),
+              rupiah(item.price),
               style: const TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w800,

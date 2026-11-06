@@ -28,6 +28,17 @@ class VendorStore extends ChangeNotifier {
   List<Job> get completed =>
       jobs.where((j) => j.status == JobStatus.completed).toList();
 
+  /// Orders visible on the customer side.
+  List<Job> get customerOrders => List.unmodifiable(jobs);
+
+  /// The customer's currently active order (if any).
+  Job? get activeCustomerOrder {
+    for (final j in jobs) {
+      if (j.status != JobStatus.completed) return j;
+    }
+    return null;
+  }
+
   int get todayEarnings => weekEarnings[DateTime.now().weekday - 1];
 
   void _seed() {
@@ -64,7 +75,7 @@ class VendorStore extends ChangeNotifier {
         serviceName: 'Servis & Cuci AC',
         categoryLabel: 'Servis AC',
         icon: Icons.ac_unit_rounded,
-        color: AppColors.blue,
+        color: AppColors.royalPurple,
         customerName: 'Sinta',
         area: 'Beji, Depok',
         fullAddress: 'Jl. Margonda Raya No. 21, Beji, Depok',
@@ -79,7 +90,7 @@ class VendorStore extends ChangeNotifier {
         serviceName: 'Perbaikan Pipa Bocor',
         categoryLabel: 'Pipa & Ledeng',
         icon: Icons.plumbing_rounded,
-        color: const Color(0xFF0891B2),
+        color: const Color(0xFF5825BA),
         customerName: 'Rudi',
         area: 'Cimanggis, Depok',
         fullAddress: 'Jl. Raya Bogor Km 30 No. 8, Cimanggis, Depok',
@@ -94,7 +105,7 @@ class VendorStore extends ChangeNotifier {
         serviceName: 'Pasang Stopkontak & Kabel',
         categoryLabel: 'Listrik',
         icon: Icons.electrical_services_rounded,
-        color: const Color(0xFF4F46E5),
+        color: const Color(0xFFD99026),
         customerName: 'Dewi',
         area: 'Bekasi Selatan',
         fullAddress: 'Jl. Ahmad Yani No. 55, Bekasi Selatan',
@@ -109,7 +120,7 @@ class VendorStore extends ChangeNotifier {
         serviceName: 'Cuci Sofa & Kursi',
         categoryLabel: 'Kebersihan Rumah',
         icon: Icons.cleaning_services_rounded,
-        color: const Color(0xFF0EA5E9),
+        color: AppColors.sunglowGold,
         customerName: 'Andi',
         area: 'Pancoran Mas, Depok',
         fullAddress: 'Jl. Kartini No. 12, Pancoran Mas, Depok',
@@ -124,7 +135,7 @@ class VendorStore extends ChangeNotifier {
         serviceName: 'Servis & Cuci AC',
         categoryLabel: 'Servis AC',
         icon: Icons.ac_unit_rounded,
-        color: AppColors.blue,
+        color: AppColors.royalPurple,
         customerName: 'Maya',
         area: 'Sukmajaya, Depok',
         fullAddress: 'Jl. Nusantara No. 3, Sukmajaya, Depok',
@@ -139,7 +150,7 @@ class VendorStore extends ChangeNotifier {
         serviceName: 'Pasang Furnitur',
         categoryLabel: 'Lainnya',
         icon: Icons.chair_rounded,
-        color: const Color(0xFF1E3A8A),
+        color: const Color(0xFF3B1578),
         customerName: 'Budi',
         area: 'Bekasi Barat',
         fullAddress: 'Jl. Kalimalang No. 40, Bekasi Barat',
@@ -154,7 +165,7 @@ class VendorStore extends ChangeNotifier {
         serviceName: 'Cat Dinding Ruang Tamu',
         categoryLabel: 'Cat & Dekorasi',
         icon: Icons.format_paint_rounded,
-        color: const Color(0xFF3B82F6),
+        color: const Color(0xFF8E60EC),
         customerName: 'Lia',
         area: 'Beji, Depok',
         fullAddress: 'Jl. Kemiri No. 17, Beji, Depok',
@@ -169,6 +180,21 @@ class VendorStore extends ChangeNotifier {
 
   void reset() {
     _seed();
+    notifyListeners();
+  }
+
+  void addJob(Job job) {
+    jobs.insert(0, job);
+    notifyListeners();
+  }
+
+  void markReviewed(String jobId) {
+    for (final j in jobs) {
+      if (j.id == jobId) {
+        j.reviewed = true;
+        break;
+      }
+    }
     notifyListeners();
   }
 

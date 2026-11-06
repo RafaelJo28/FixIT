@@ -235,21 +235,21 @@ const _promos = [
     subtitle: 'Untuk pesanan pertamamu.\nTeknisi terverifikasi.',
     cta: 'Pakai promo',
     icon: Icons.home_repair_service_rounded,
-    colors: [Color(0xFF1D4ED8), Color(0xFF3B82F6)],
+    colors: [Color(0xFF723CD6), Color(0xFF8E60EC)],
   ),
   _Promo(
     title: 'Paket Servis AC',
     subtitle: 'Cuci 2 unit sekaligus,\nhemat Rp30.000.',
     cta: 'Lihat paket',
     icon: Icons.ac_unit_rounded,
-    colors: [Color(0xFF0369A1), Color(0xFF0EA5E9)],
+    colors: [Color(0xFFC78726), Color(0xFFEDB158)],
   ),
   _Promo(
     title: 'Garansi 7 Hari',
     subtitle: 'Hasil kurang rapi?\nKami kerjakan ulang.',
     cta: 'Selengkapnya',
     icon: Icons.verified_user_rounded,
-    colors: [Color(0xFF1E3A8A), AppColors.blue],
+    colors: [Color(0xFF45199A), Color(0xFF723CD6)],
   ),
 ];
 
@@ -933,7 +933,7 @@ class _PopularCard extends StatelessWidget {
                         ),
                         const Spacer(),
                         Text(
-                          formatIdr(item.price),
+                          rupiah(item.price),
                           style: const TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w800,

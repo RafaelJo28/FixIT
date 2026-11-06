@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../data/sample_data.dart';
 import '../models/models.dart';
 import '../theme.dart';
+import '../widgets/common.dart';
 
 /// Orders tab — placeholder list of (hard-coded) past/upcoming orders.
 class OrdersScreen extends StatelessWidget {
@@ -131,7 +132,7 @@ class _OrderCard extends StatelessWidget {
                 ],
               ),
               Text(
-                formatIdr(service.price),
+                rupiah(service.price),
                 style: const TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.w800,

@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 
 import '../auth/welcome_screen.dart';
 import '../data/sample_data.dart';
+import '../data/worker_directory.dart';
 import '../theme.dart';
+import '../vendor/vendor_store.dart';
 
 /// Profile tab — static prototype menu.
 class ProfileScreen extends StatelessWidget {
@@ -38,6 +40,8 @@ class ProfileScreen extends StatelessWidget {
       ),
     );
     if (ok == true && context.mounted) {
+      WorkerDirectory.instance.reset();
+      VendorStore.instance.reset();
       Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(builder: (_) => const WelcomeScreen()),
         (route) => false,
@@ -89,7 +93,7 @@ class ProfileScreen extends StatelessWidget {
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
         gradient: const LinearGradient(
-          colors: [AppColors.blue, Color(0xFF1D4ED8)],
+          colors: [AppColors.royalPurple, Color(0xFF4E1FAD)],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),

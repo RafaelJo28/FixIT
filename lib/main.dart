@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 
 import 'auth/welcome_screen.dart';
+import 'services/auth_storage.dart';
 import 'theme.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await AuthStorage.instance.init();
   runApp(const FixITApp());
 }
 

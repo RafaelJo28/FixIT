@@ -4,6 +4,7 @@ import '../data/sample_data.dart';
 import '../models/models.dart';
 import 'success_screen.dart';
 import '../theme.dart';
+import '../widgets/common.dart';
 
 /// Step 2 of booking: review the order, pick GoPay or Dana, and pay.
 class CheckoutScreen extends StatefulWidget {
@@ -131,7 +132,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
               CircleAvatar(
                 radius: 22,
                 backgroundColor: _assignedWorker.verified
-                    ? const Color(0xFFEFF6FF)
+                    ? AppColors.purpleTint
                     : const Color(0xFFF3F4F6),
                 child: Text(
                   _assignedWorker.name.split(' ').first,
@@ -174,7 +175,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                               vertical: 4,
                             ),
                             decoration: BoxDecoration(
-                              color: const Color(0xFFEFF6FF),
+                              color: AppColors.purpleTint,
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: const Text(
@@ -192,7 +193,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                 ),
               ),
               Text(
-                formatIdr(
+                rupiah(
                   (widget.item.price * _assignedWorker.priceMultiplier).round(),
                 ),
                 style: const TextStyle(
@@ -303,24 +304,24 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: const Color(0xFFEFF6FF),
+        color: AppColors.purpleTint,
         borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: const Color(0xFFD6E6FF)),
+        border: Border.all(color: AppColors.purpleBorder),
       ),
       child: Column(
         children: [
-          _priceRow('Harga layanan', formatIdr(_baseWithWorker)),
+          _priceRow('Harga layanan', rupiah(_baseWithWorker)),
           const SizedBox(height: 8),
-          _priceRow('Biaya layanan', formatIdr(_serviceFee)),
+          _priceRow('Biaya layanan', rupiah(_serviceFee)),
           if (_premium) ...[
             const SizedBox(height: 8),
-            _priceRow('Biaya pilih teknisi', formatIdr(SampleData.premiumFee)),
+            _priceRow('Biaya pilih teknisi', rupiah(SampleData.premiumFee)),
           ],
           const Padding(
             padding: EdgeInsets.symmetric(vertical: 10),
             child: Divider(height: 1),
           ),
-          _priceRow('Total', formatIdr(_total), bold: true),
+          _priceRow('Total', rupiah(_total), bold: true),
         ],
       ),
     );
@@ -363,7 +364,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     color: Colors.white,
                   ),
                 )
-              : Text('Bayar ${formatIdr(_total)}'),
+              : Text('Bayar ${rupiah(_total)}'),
         ),
       ),
     );

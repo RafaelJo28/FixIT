@@ -26,7 +26,8 @@ void main() {
       300,
       scrollable: find.byType(Scrollable).first,
     );
-    await tester.tap(sunday);
+    await tester.pumpAndSettle();
+    await tester.tap(sunday, warnIfMissed: false);
     await tester.pump();
 
     await tester.tap(find.text('Simpan'));

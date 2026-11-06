@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../data/sample_data.dart';
 import '../models/models.dart';
 import 'root_shell.dart';
 import '../theme.dart';
+import '../widgets/common.dart';
 
 /// Confirmation screen shown after a successful (simulated) payment.
 class SuccessScreen extends StatelessWidget {
@@ -92,7 +92,7 @@ class SuccessScreen extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          formatIdr(total),
+                          rupiah(total),
                           style: const TextStyle(
                             fontSize: 17,
                             fontWeight: FontWeight.w800,

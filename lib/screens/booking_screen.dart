@@ -4,6 +4,7 @@ import '../data/sample_data.dart';
 import '../models/models.dart';
 import 'checkout_screen.dart';
 import '../theme.dart';
+import '../widgets/common.dart';
 
 /// Step 1 of booking: pick a date, time slot, and address, then continue.
 class BookingScreen extends StatefulWidget {
@@ -19,8 +20,16 @@ class _BookingScreenState extends State<BookingScreen> {
   int _dayIndex = 0;
   int? _slotIndex;
   String _address = 'Jl. Margonda Raya No. 123, Depok';
+  late final TextEditingController _addressController =
+      TextEditingController(text: _address);
 
   late final List<_Day> _days = _buildDays();
+
+  @override
+  void dispose() {
+    _addressController.dispose();
+    super.dispose();
+  }
 
   static List<_Day> _buildDays() {
     const names = ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'];
@@ -130,7 +139,7 @@ class _BookingScreenState extends State<BookingScreen> {
             ),
           ),
           Text(
-            formatIdr(widget.item.price),
+            rupiah(widget.item.price),
             style: const TextStyle(
               fontSize: 15,
               fontWeight: FontWeight.w800,
@@ -249,7 +258,7 @@ class _BookingScreenState extends State<BookingScreen> {
   Widget _addressField() {
     return TextField(
       maxLines: 2,
-      controller: TextEditingController(text: _address),
+      controller: _addressController,
       onChanged: (v) => _address = v,
       decoration: const InputDecoration(
         hintText: 'Masukkan alamat lengkap',

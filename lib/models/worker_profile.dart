@@ -1,7 +1,7 @@
-/// Pure data models for worker (vendor) profiles. No Flutter imports.
-///
-/// PROTOTYPE ONLY: everything lives in memory (see WorkerDirectory). Later this
-/// data comes from the backend, and verification is decided by the server.
+// Pure data models for worker (vendor) profiles. No Flutter imports.
+//
+// PROTOTYPE ONLY: everything lives in memory (see WorkerDirectory). Later this
+// data comes from the backend, and verification is decided by the server.
 
 enum Gender { male, female }
 
